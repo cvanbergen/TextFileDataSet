@@ -1,3 +1,6 @@
 .vs/
 TextFileDataSet/bin/
 TextFileDataSet/obj/
+TextFileDataSetDemo/bin/
+TextFileDataSetDemo/obj/
+*.user
