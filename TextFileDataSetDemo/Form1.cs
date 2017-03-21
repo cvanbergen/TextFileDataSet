@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using PragmaticBlue.Data;
+using TextFileDataSet;
 
 namespace DemoTextFileDataSet
 {
     public partial class Form1 : Form
     {
-        private TextFileDataSet _myTextFileDataSet;
+        private TextFileDataSet.TextFileDataSet _myTextFileDataSet;
 
         public Form1()
         {
@@ -20,7 +20,7 @@ namespace DemoTextFileDataSet
             // open the file 
             var fileStream = new FileStream("DemoText.txt", FileMode.Open, FileAccess.Read);
             // create a new instance of MyTextFileDataSet
-            _myTextFileDataSet = new TextFileDataSet();
+            _myTextFileDataSet = new TextFileDataSet.TextFileDataSet();
             // create a new RegexColumnBuilder
             var builder = new RegexColumnBuilder();
             builder.AddColumn("ID", ',', RegexColumnType.INTEGER);
@@ -58,7 +58,7 @@ namespace DemoTextFileDataSet
             // open the file 
             var fileStream = new FileStream("DemoText.txt", FileMode.Open, FileAccess.Read);
             // create a new instance of MyTextFileDataSet
-            _myTextFileDataSet = new TextFileDataSet();
+            _myTextFileDataSet = new TextFileDataSet.TextFileDataSet();
             // specify the regular expression for validating and recognising columns
             _myTextFileDataSet.ContentExpression = new Regex(Expression.Text);
             // fill the dataset

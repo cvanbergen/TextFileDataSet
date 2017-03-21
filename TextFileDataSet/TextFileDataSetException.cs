@@ -1,6 +1,6 @@
 using System;
 
-namespace PragmaticBlue.Data
+namespace TextFileDataSet
 {
     /// <summary>
     ///     Special exception for TextFileDataSet

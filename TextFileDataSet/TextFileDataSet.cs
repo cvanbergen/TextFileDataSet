@@ -4,7 +4,7 @@ using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace PragmaticBlue.Data
+namespace TextFileDataSet
 {
     /// <summary>
     ///     Class for transforming a text-file into a dataset

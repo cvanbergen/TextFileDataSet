@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace PragmaticBlue.Data
+namespace TextFileDataSet
 {
     /// <summary>
     ///     Class for creating regular expressions for use in TextFileDataSet
