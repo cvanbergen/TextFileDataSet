@@ -1,19 +1,20 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
+
 [assembly: AssemblyTitle("TextFileDataSet")]
-[assembly: AssemblyDescription("converting text files or csv-files to a System.Data.DataSet based on regular expressions")]
+[assembly:
+    AssemblyDescription("converting text files or csv-files to a System.Data.DataSet based on regular expressions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+[assembly: AssemblyCulture("")]
 
 //
 // Version information for an assembly consists of the following four values:
@@ -53,6 +54,7 @@ using System.Runtime.CompilerServices;
 //   (*) Delay Signing is an advanced option - see the Microsoft .NET Framework
 //       documentation for more information on this.
 //
+
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]

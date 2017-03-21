@@ -6,177 +6,159 @@ using System.Text.RegularExpressions;
 namespace PragmaticBlue.Data
 {
     /// <summary>
-    /// Class for creating regular expressions for use in TextFileDataSet
+    ///     Class for creating regular expressions for use in TextFileDataSet
     /// </summary>
     public class RegexColumnBuilder
     {
         /// <summary>
-        /// Adds a column to the collection of columns from which
-        /// the regular expression will be created
+        ///     Get the collection of created RegexColumns
         /// </summary>
-        /// <param name="aColumnName">name of the column</param>
-        /// <param name="aSeparator">column separator</param>
-        public void AddColumn(string aColumnName, char aSeparator)
-        {
-            AddColumn(aColumnName, string.Format("[^{0}]+", aSeparator), string.Empty);
-            Separator = aSeparator.ToString();
-        }
-
-		/// <summary>
-		/// Adds a column to the collection of columns from which
-		/// the regular expression will be created
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aSeparator">column separator</param>
-		/// <param name="aColumnType">RegexColumnType of this column</param>
-		public void AddColumn(string aColumnName, char aSeparator, RegexColumnType aColumnType)
-		{
-			AddColumn(aColumnName, string.Format("[^{0}]+", aSeparator), string.Empty, aColumnType);
-			Separator = aSeparator.ToString();
-		}
-
-		/// <summary>
-		/// Adds a column to the collection of columns from which
-		/// the regular expression will be created
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aLength">amount of characters this column has</param>
-		public void AddColumn(string aColumnName, int aLength)
-		{
-			AddColumn(aColumnName, ".{" + aLength + "}", string.Empty);
-		}
-
-		/// <summary>
-		/// Adds a column to the collection of columns from which
-		/// the regular expression will be created
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aLength">amount of characters this column has</param>
-		/// <param name="aColumnType">RegexColumnType of this column</param>
-		public void AddColumn(string aColumnName, int aLength, RegexColumnType aColumnType)
-		{
-			AddColumn(aColumnName, ".{" + aLength + "}", string.Empty, aColumnType);
-		}
+        public List<RegexColumn> Columns { get; } = new List<RegexColumn>();
 
         /// <summary>
-        /// Adds a column to the collection of columns from which
-        /// the regular expression will be created
+        ///     A sepator string that will be appended after each
+        ///     column expression (including any trailing regular expression)
         /// </summary>
-        /// <param name="aColumnName">name of the column</param>
-        /// <param name="aColumnRegEx">regular expression for capturing the value of this column</param>
-        public void AddColumn(string aColumnName, string aColumnRegEx)
-        {
-            AddColumn(aColumnName, aColumnRegEx, string.Empty);
-        }
-
-		/// <summary>
-		/// Adds a column to the collection of columns from which
-		/// the regular expression will be created
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aColumnRegEx">regular expression for capturing the value of this column</param>
-		/// <param name="aColumnType">RegexColumnType of this column</param>
-		public void AddColumn(string aColumnName, string aColumnRegEx, RegexColumnType aColumnType)
-		{
-			AddColumn(aColumnName, aColumnRegEx, string.Empty, aColumnType);
-		}
+        public string Separator { get; set; } = string.Empty;
 
         /// <summary>
-        /// Adds a column to the collection of columns from which
-        /// the regular expression will be created
+        ///     Indicates wether the regular expression will start
+        ///     searching at each beginning of a line/string
+        ///     default is set to true
         /// </summary>
-        /// <param name="aColumnName">name of the column</param>
-        /// <param name="aColumnRegEx">regular expression for capturing the value of this column</param>
-        /// <param name="aTrailingRegEx">regular expression for any data not te be captured for this column</param>
-        public void AddColumn(string aColumnName, string aColumnRegEx, string aTrailingRegEx)
-        {
-            Columns.Add(new RegexColumn(aColumnName, aColumnRegEx, aTrailingRegEx));  
-        }
+        public bool StartAtBeginOfString { get; set; } = true;
 
-		/// <summary>
-		/// Adds a column to the collection of columns from which
-		/// the regular expression will be created
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aColumnRegEx">regular expression for capturing the value of this column</param>
-		/// <param name="aTrailingRegEx">regular expression for any data not te be captured for this column</param>
-		/// <param name="aColumnType">RegexColumnType of this column</param>
-		public void AddColumn(string aColumnName, string aColumnRegEx, string aTrailingRegEx, RegexColumnType aColumnType)
-		{
-			Columns.Add(new RegexColumn(aColumnName, aColumnRegEx, aTrailingRegEx, aColumnType));
-		}
-
-        private List<RegexColumn> _Columns =  new List<RegexColumn>();
-		/// <summary>
-		/// Get the collection of created RegexColumns
-		/// </summary>
-        public List<RegexColumn> Columns
-        {
-            get { return _Columns; }
-        }
-
-		private string _Separator = string.Empty;
         /// <summary>
-        /// A sepator string that will be appended after each
-        /// column expression (including any trailing regular expression)
+        ///     Indicates wether the regular expression will end
+        ///     searching at each end of a line/string
+        ///     default is set to true
         /// </summary>
-        public string Separator
-        {
-            get { return _Separator; }
-            set { _Separator = value; }
-        }
-	
-        private bool _StartAtBeginOfString = true;
-        /// <summary>
-        /// Indicates wether the regular expression will start 
-        /// searching at each beginning of a line/string
-        /// default is set to true
-        /// </summary>
-        public bool StartAtBeginOfString
-        {
-            get { return _StartAtBeginOfString; }
-            set { _StartAtBeginOfString = value; }
-        }
+        public bool EndAtEndOfString { get; set; } = true;
 
-        private bool _EndAtEndOfString = true;
         /// <summary>
-        /// Indicates wether the regular expression will end
-        /// searching at each end of a line/string
-        /// default is set to true
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
         /// </summary>
-        public bool EndAtEndOfString
+        /// <param name="columnName">name of the column</param>
+        /// <param name="separator">column separator</param>
+        public void AddColumn(string columnName, char separator)
         {
-            get { return _EndAtEndOfString; }
-            set { _EndAtEndOfString = value; }
+            AddColumn(columnName, $"[^{separator}]+", string.Empty);
+            Separator = separator.ToString();
         }
 
         /// <summary>
-        /// creates a regular expression string based on the added columns and 
-        /// optional separator
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="separator">column separator</param>
+        /// <param name="columnType">RegexColumnType of this column</param>
+        public void AddColumn(string columnName, char separator, RegexColumnType columnType)
+        {
+            AddColumn(columnName, $"[^{separator}]+", string.Empty, columnType);
+            Separator = separator.ToString();
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="length">amount of characters this column has</param>
+        public void AddColumn(string columnName, int length)
+        {
+            AddColumn(columnName, ".{" + length + "}", string.Empty);
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="length">amount of characters this column has</param>
+        /// <param name="columnType">RegexColumnType of this column</param>
+        public void AddColumn(string columnName, int length, RegexColumnType columnType)
+        {
+            AddColumn(columnName, ".{" + length + "}", string.Empty, columnType);
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="columnRegEx">regular expression for capturing the value of this column</param>
+        public void AddColumn(string columnName, string columnRegEx)
+        {
+            AddColumn(columnName, columnRegEx, string.Empty);
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="columnRegEx">regular expression for capturing the value of this column</param>
+        /// <param name="columnType">RegexColumnType of this column</param>
+        public void AddColumn(string columnName, string columnRegEx, RegexColumnType columnType)
+        {
+            AddColumn(columnName, columnRegEx, string.Empty, columnType);
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="columnRegEx">regular expression for capturing the value of this column</param>
+        /// <param name="trailingRegEx">regular expression for any data not te be captured for this column</param>
+        public void AddColumn(string columnName, string columnRegEx, string trailingRegEx)
+        {
+            Columns.Add(new RegexColumn(columnName, columnRegEx, trailingRegEx));
+        }
+
+        /// <summary>
+        ///     Adds a column to the collection of columns from which
+        ///     the regular expression will be created
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="columnRegEx">regular expression for capturing the value of this column</param>
+        /// <param name="trailingRegEx">regular expression for any data not te be captured for this column</param>
+        /// <param name="columnType">RegexColumnType of this column</param>
+        public void AddColumn(string columnName, string columnRegEx, string trailingRegEx,
+                              RegexColumnType columnType)
+        {
+            Columns.Add(new RegexColumn(columnName, columnRegEx, trailingRegEx, columnType));
+        }
+
+        /// <summary>
+        ///     creates a regular expression string based on the added columns and
+        ///     optional separator
         /// </summary>
         /// <returns>regular expression for use in TextFileDataSet</returns>
         public string CreateRegularExpressionString()
         {
-            StringBuilder Result = new StringBuilder();
-            if (StartAtBeginOfString) Result.Append("^");
-            for (int i = 0; i<Columns.Count; i++)
+            var result = new StringBuilder();
+            if (StartAtBeginOfString) result.Append("^");
+            for (var i = 0; i < Columns.Count; i++)
             {
-                Result.Append("(?<");
-                Result.Append(Columns[i].ColumnName);
-                Result.Append(">");
-                Result.Append(Columns[i].RegEx);
-                Result.Append(")");
-                Result.Append(Columns[i].TrailingRegEx);
-                if (i<Columns.Count-1)
-                    Result.Append(Separator);
+                result.Append("(?<");
+                result.Append(Columns[i].ColumnName);
+                result.Append(">");
+                result.Append(Columns[i].RegEx);
+                result.Append(")");
+                result.Append(Columns[i].TrailingRegEx);
+                if (i < Columns.Count - 1)
+                    result.Append(Separator);
             }
-            if (EndAtEndOfString) Result.Append("$");
-            return Result.ToString();
+            if (EndAtEndOfString) result.Append("$");
+            return result.ToString();
         }
 
         /// <summary>
-        /// creates a regular expression based on the added columns and 
-        /// optional separator
+        ///     creates a regular expression based on the added columns and
+        ///     optional separator
         /// </summary>
         /// <returns></returns>
         public Regex CreateRegularExpression()
@@ -185,8 +167,8 @@ namespace PragmaticBlue.Data
         }
 
         /// <summary>
-        /// creates a regular expression based on the added columns and 
-        /// optional separator
+        ///     creates a regular expression based on the added columns and
+        ///     optional separator
         /// </summary>
         /// <param name="aOptions"></param>
         /// <returns></returns>
@@ -196,117 +178,106 @@ namespace PragmaticBlue.Data
         }
     }
 
-	/// <summary>
-	/// Enumeration for certain types used in TextFileDataSet
-	/// </summary>
-	public enum RegexColumnType
-	{
-		/// <summary>
-		/// Int32
-		/// </summary>
-		INTEGER,
-		/// <summary>
-		/// Double
-		/// </summary>
-		DOUBLE,
-		/// <summary>
-		/// String
-		/// </summary>
-		STRING,
-		/// <summary>
-		/// DateTime
-		/// </summary>
-		DATE
-	}
+    /// <summary>
+    ///     Enumeration for certain types used in TextFileDataSet
+    /// </summary>
+    public enum RegexColumnType
+    {
+        /// <summary>
+        ///     Int32
+        /// </summary>
+        INTEGER,
 
-	/// <summary>
-	/// Class for defining a regular expression column
-	/// </summary>
+        /// <summary>
+        ///     Double
+        /// </summary>
+        DOUBLE,
+
+        /// <summary>
+        ///     String
+        /// </summary>
+        STRING,
+
+        /// <summary>
+        ///     DateTime
+        /// </summary>
+        DATE
+    }
+
+    /// <summary>
+    ///     Class for defining a regular expression column
+    /// </summary>
     public class RegexColumn
     {
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aRegEx">regular expression for capturing the value of this column</param>
-		/// <param name="aTrailingRegex">regular expression for any data not te be captured for this column</param>
-        public RegexColumn(string aColumnName, string aRegEx, string aTrailingRegex)
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="regEx">regular expression for capturing the value of this column</param>
+        /// <param name="trailingRegex">regular expression for any data not te be captured for this column</param>
+        public RegexColumn(string columnName, string regEx, string trailingRegex)
         {
-            Init(aColumnName, aRegEx, aTrailingRegex, RegexColumnType.STRING);
+            Init(columnName, regEx, trailingRegex, RegexColumnType.STRING);
         }
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="aColumnName">name of the column</param>
-		/// <param name="aRegEx">regular expression for capturing the value of this column</param>
-		/// <param name="aTrailingRegex">regular expression for any data not te be captured for this column</param>
-		/// <param name="aColumnType">Type of this column</param>
-		public RegexColumn(string aColumnName, string aRegEx, string aTrailingRegex, RegexColumnType aColumnType)
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="columnName">name of the column</param>
+        /// <param name="regEx">regular expression for capturing the value of this column</param>
+        /// <param name="trailingRegex">regular expression for any data not te be captured for this column</param>
+        /// <param name="columnType">Type of this column</param>
+        public RegexColumn(string columnName, string regEx, string trailingRegex, RegexColumnType columnType)
         {
-            Init(aColumnName, aRegEx, aTrailingRegex, aColumnType);
+            Init(columnName, regEx, trailingRegex, columnType);
         }
 
-		private void Init(string aColumnName, string aRegEx, string aTrailingRegex, RegexColumnType aColumnType)
+        /// <summary>
+        ///     Get or set the name of the column
+        /// </summary>
+        public string ColumnName { get; set; }
+
+        /// <summary>
+        ///     Get or set the regular expression for capturing the value of this column
+        /// </summary>
+        public string RegEx { get; set; }
+
+        /// <summary>
+        ///     Get or set the regular expression for any data not te be captured for this column
+        /// </summary>
+        public string TrailingRegEx { get; set; }
+
+        /// <summary>
+        ///     Get or set the Type of this column
+        /// </summary>
+        public RegexColumnType ColumnType { get; set; }
+
+        /// <summary>
+        ///     Get the System.Type of this RegexColumn
+        /// </summary>
+        public Type ColumnTypeAsType
         {
-            ColumnName = aColumnName;
-            RegEx = aRegEx;
-            TrailingRegEx = aTrailingRegex;
-            ColumnType = aColumnType;
+            get
+            {
+                switch (ColumnType)
+                {
+                    case RegexColumnType.INTEGER:
+                        return typeof(int);
+                    case RegexColumnType.DOUBLE:
+                        return typeof(double);
+                    case RegexColumnType.DATE:
+                        return typeof(DateTime);
+                }
+                return typeof(string);
+            }
         }
 
-        private string _ColumnName;
-		/// <summary>
-		/// Get or set the name of the column
-		/// </summary>
-        public string ColumnName
+        private void Init(string columnName, string regEx, string trailingRegex, RegexColumnType columnType)
         {
-            get { return _ColumnName; }
-            set { _ColumnName = value; }
+            ColumnName = columnName;
+            RegEx = regEx;
+            TrailingRegEx = trailingRegex;
+            ColumnType = columnType;
         }
-
-        private string _RegEx;
-		/// <summary>
-		/// Get or set the regular expression for capturing the value of this column
-		/// </summary>
-        public string RegEx
-        {
-            get { return _RegEx; }
-            set { _RegEx = value; }
-        }
-	
-	    private string  _TrailingRegEx;
-		/// <summary>
-		/// Get or set the regular expression for any data not te be captured for this column
-		/// </summary>
-	    public string  TrailingRegEx
-	    {
-		    get { return _TrailingRegEx;}
-		    set { _TrailingRegEx = value;}
-	    }
-
-		private RegexColumnType _ColumnType;
-		/// <summary>
-		/// Get or set the Type of this column
-		/// </summary>
-		public RegexColumnType ColumnType
-        {
-            get { return _ColumnType; }
-            set { _ColumnType = value; }
-        }
-
-		/// <summary>
-		/// Get the System.Type of this RegexColumn
-		/// </summary>
-		public Type ColumnTypeAsType
-		{
-			get
-			{
-				if (_ColumnType == RegexColumnType.INTEGER) return typeof(int);
-				if (_ColumnType == RegexColumnType.DOUBLE) return typeof(double);
-				if (_ColumnType == RegexColumnType.DATE) return typeof(DateTime);
-				return typeof(string);
-			}
-		}  
     }
 }
