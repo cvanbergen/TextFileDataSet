@@ -1,5 +1,8 @@
 # TextFileDataSet
 Converting text files or csv-files to a System.Data.DataTable based on regular expressions
+
+[![Build status](https://ci.appveyor.com/api/projects/status/12wo95w2s0xwjm9t?svg=true)](https://ci.appveyor.com/project/cvanbergen/textfiledataset)
+
 ## Introduction
 (Originally posted on 18 Feb 2008)
 This code allows you to generate and fill a DataTable from a text file. You are able to:
