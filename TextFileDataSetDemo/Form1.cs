@@ -23,6 +23,8 @@ namespace DemoTextFileDataSet
             _myTextFileDataSet = new TextFileDataSet.TextFileDataSet();
             // create a new RegexColumnBuilder
             var builder = new RegexColumnBuilder();
+            builder.EndAtEndOfString = false;
+            builder.EmptyFieldsAreAccepted = true;
             builder.AddColumn("ID", ',', RegexColumnType.INTEGER);
             builder.AddColumn("Name", ',', RegexColumnType.STRING);
             builder.AddColumn("Date", ',', RegexColumnType.DATE);
@@ -49,8 +51,9 @@ namespace DemoTextFileDataSet
         private void ShowMisReads()
         {
             listBox1.Items.Clear();
-            foreach (var item in _myTextFileDataSet.MisReads)
-                listBox1.Items.Add(item);
+            if (_myTextFileDataSet.MisReads != null)
+                foreach (var item in _myTextFileDataSet.MisReads)
+                    listBox1.Items.Add(item);
         }
 
         private void OpenExpression_Click(object sender, EventArgs e)

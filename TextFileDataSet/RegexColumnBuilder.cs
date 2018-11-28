@@ -36,6 +36,14 @@ namespace TextFileDataSet
         public bool EndAtEndOfString { get; set; } = true;
 
         /// <summary>
+        ///     Indicates wether or not an empty column (no value 
+        ///     between the separators) causes a line to be
+        ///     a misread
+        ///     default is set to true
+        /// </summary>
+        public bool EmptyFieldsAreAccepted { get; set; } = true;
+
+        /// <summary>
         ///     Adds a column to the collection of columns from which
         ///     the regular expression will be created
         /// </summary>
@@ -148,9 +156,9 @@ namespace TextFileDataSet
                 result.Append(">");
                 result.Append(Columns[i].RegEx);
                 result.Append(")");
+                if (EmptyFieldsAreAccepted) result.Append("?");
                 result.Append(Columns[i].TrailingRegEx);
-                if (i < Columns.Count - 1)
-                    result.Append(Separator);
+                if (i < Columns.Count - 1) result.Append(Separator);
             }
             if (EndAtEndOfString) result.Append("$");
             return result.ToString();
