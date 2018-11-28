@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>TextFileDataSet</id>
+    <version>$version$</version>
+    <title>TextFileDataSet</title>
+    <authors>Christiaan van Bergen</authors>
+    <owners>Christiaan van Bergen</owners>
+    <licenseUrl>https://github.com/cvanbergen/TextFileDataSet/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/cvanbergen/TextFileDataSet</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Converting text files or csv-files to a System.Data.DataSet based on regular expressions</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright &#x00A9; Christiaan van Bergen.  All rights reserved.</copyright>
+    <tags>csv dataset datatable text file convert import</tags>
+  </metadata>
+  <files>
+	<file src="TextFileDataSet\bin\$configuration$\TextFileDataSet.dll" target="lib\net20\" />
+  </files>
+</package>
