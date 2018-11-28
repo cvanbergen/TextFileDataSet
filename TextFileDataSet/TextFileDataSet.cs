@@ -19,6 +19,12 @@ namespace TextFileDataSet
 
         private List<RegexColumn> _regexColumns;
 
+        public TextFileDataSet()
+        {
+            UseFirstRowNamesAsColumnNames = false;
+            TableName = "Table1";
+        }
+
         /// <summary>
         ///     Set the RegexColumnBuilder
         ///     on setting this the columns and their RegexColumnTypes are set
@@ -65,7 +71,7 @@ namespace TextFileDataSet
         ///     used as column names instead of the ones supplied in
         ///     te regular expression
         /// </summary>
-        public bool UseFirstRowNamesAsColumnNames { get; set; } = false;
+        public bool UseFirstRowNamesAsColumnNames { get; set; }
 
         /// <summary>
         ///     When set to true the values in the first row are
@@ -78,7 +84,7 @@ namespace TextFileDataSet
         ///     or the name of the datatable to use when a dataset is
         ///     provided
         /// </summary>
-        public string TableName { get; set; } = "Table1";
+        public string TableName { get; set; }
 
         /// <summary>
         ///     The text file to be read

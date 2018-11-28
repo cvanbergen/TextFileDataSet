@@ -10,30 +10,37 @@ namespace TextFileDataSet
     /// </summary>
     public class RegexColumnBuilder
     {
+        public RegexColumnBuilder()
+        {
+            Columns = new List<RegexColumn>();
+            Separator = string.Empty;
+            StartAtBeginOfString = true;
+            EndAtEndOfString = true;
+        }
         /// <summary>
         ///     Get the collection of created RegexColumns
         /// </summary>
-        public List<RegexColumn> Columns { get; } = new List<RegexColumn>();
+        public List<RegexColumn> Columns { get; private set; }
 
         /// <summary>
         ///     A sepator string that will be appended after each
         ///     column expression (including any trailing regular expression)
         /// </summary>
-        public string Separator { get; set; } = string.Empty;
+        public string Separator { get; set; }
 
         /// <summary>
         ///     Indicates wether the regular expression will start
         ///     searching at each beginning of a line/string
         ///     default is set to true
         /// </summary>
-        public bool StartAtBeginOfString { get; set; } = true;
+        public bool StartAtBeginOfString { get; set; }
 
         /// <summary>
         ///     Indicates wether the regular expression will end
         ///     searching at each end of a line/string
         ///     default is set to true
         /// </summary>
-        public bool EndAtEndOfString { get; set; } = true;
+        public bool EndAtEndOfString { get; set; }
 
         /// <summary>
         ///     Adds a column to the collection of columns from which
@@ -43,7 +50,7 @@ namespace TextFileDataSet
         /// <param name="separator">column separator</param>
         public void AddColumn(string columnName, char separator)
         {
-            AddColumn(columnName, $"[^{separator}]+", string.Empty);
+            AddColumn(columnName, string.Format("[^{0}]+", separator), string.Empty);
             Separator = separator.ToString();
         }
 
@@ -56,7 +63,7 @@ namespace TextFileDataSet
         /// <param name="columnType">RegexColumnType of this column</param>
         public void AddColumn(string columnName, char separator, RegexColumnType columnType)
         {
-            AddColumn(columnName, $"[^{separator}]+", string.Empty, columnType);
+            AddColumn(columnName, string.Format("[^{0}]+", separator), string.Empty, columnType);
             Separator = separator.ToString();
         }
 
