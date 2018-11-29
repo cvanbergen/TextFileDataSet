@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TextFileDataSet
@@ -255,5 +256,53 @@ namespace TextFileDataSet
                 if (column.ExtendedProperties.ContainsKey(NewName))
                     column.ColumnName = column.ExtendedProperties[NewName].ToString();
         }
+
+        /// <summary>
+        ///     Writes the content of the DataTable to a file
+        /// </summary>
+        /// <param name="file">Full path of the file to write</param>
+        /// <param name="delimiter">The delimiter used to separate the values</param>
+        /// <param name="fileMode">Optional: define the FileMode. Default FileMode.CreateNew</param>
+        /// <exception cref="IOException">File already exists</exception>
+        public void WriteCsv(string file, string delimiter, FileMode fileMode=FileMode.CreateNew)
+        {
+            using (var fs = new FileStream(file, fileMode))
+            using (var sw = new StreamWriter(fs))
+            {
+                foreach (DataRow row in Tables[0].Rows)
+                {
+                    var line = new StringBuilder();
+                    foreach (var column in Tables[TableName].Columns)
+                    {
+                        line.Append(row[column.ToString()]);
+                        line.Append(delimiter);
+                    }
+                    sw.WriteLine(line.ToString().Substring(0,line.Length-delimiter.Length));
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Creates a string containing the records in the 
+        ///     DataTable as a csv
+        /// </summary>
+        /// <param name="delimiter">The delimiter used to separate the values</param>
+        public string CreateCsvContent(string delimiter)
+        {
+            var result = new StringBuilder();
+            foreach (DataRow row in Tables[0].Rows)
+            {
+                var line = new StringBuilder();
+                foreach (var column in Tables[TableName].Columns)
+                {
+                    line.Append(row[column.ToString()]);
+                    line.Append(delimiter);
+                }
+                result.AppendLine(line.ToString().Substring(0,line.Length-delimiter.Length));
+            }
+
+            return result.ToString();
+        }
+
     }
 }
