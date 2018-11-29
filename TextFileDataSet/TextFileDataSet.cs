@@ -19,6 +19,11 @@ namespace TextFileDataSet
 
         private List<RegexColumn> _regexColumns;
 
+        /// <summary>
+        ///     Constructor setting default values for
+        ///         UseFirstRowNamesAsColumnNames = false
+        ///         TableName = "Table1"
+        /// </summary>
         public TextFileDataSet()
         {
             UseFirstRowNamesAsColumnNames = false;

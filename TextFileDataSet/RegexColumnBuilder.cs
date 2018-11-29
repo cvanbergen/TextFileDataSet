@@ -10,6 +10,12 @@ namespace TextFileDataSet
     /// </summary>
     public class RegexColumnBuilder
     {
+        /// <summary>
+        ///     Constructor setting default values for
+        ///         Separator=""
+        ///         StartAtBeginOfString = true
+        ///         EndAtEndOfString = true
+        /// </summary>
         public RegexColumnBuilder()
         {
             Columns = new List<RegexColumn>();
