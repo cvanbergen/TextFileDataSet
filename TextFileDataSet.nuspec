@@ -16,9 +16,14 @@
   </metadata>
   <files>
 	<file src="TextFileDataSet\bin\$configuration$\TextFileDataSet.dll" target="lib\net20\" />
+	<file src="TextFileDataSet\bin\$configuration$\TextFileDataSet.xml" target="lib\net20\" />
 	<file src="TextFileDataSet_v30\bin\$configuration$\TextFileDataSet.dll" target="lib\net30\" />
+	<file src="TextFileDataSet_v30\bin\$configuration$\TextFileDataSet.xml" target="lib\net30\" />
 	<file src="TextFileDataSet_v35\bin\$configuration$\TextFileDataSet.dll" target="lib\net35\" />
+	<file src="TextFileDataSet_v35\bin\$configuration$\TextFileDataSet.xml" target="lib\net35\" />
 	<file src="TextFileDataSet_v40\bin\$configuration$\TextFileDataSet.dll" target="lib\net40\" />
+	<file src="TextFileDataSet_v40\bin\$configuration$\TextFileDataSet.xml" target="lib\net40\" />
 	<file src="TextFileDataSet_v47\bin\$configuration$\TextFileDataSet.dll" target="lib\net47\" />
+	<file src="TextFileDataSet_v47\bin\$configuration$\TextFileDataSet.xml" target="lib\net47\" />
   </files>
 </package>
