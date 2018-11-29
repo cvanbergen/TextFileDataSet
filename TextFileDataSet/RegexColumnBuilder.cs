@@ -22,6 +22,7 @@ namespace TextFileDataSet
             Separator = string.Empty;
             StartAtBeginOfString = true;
             EndAtEndOfString = true;
+            EmptyFieldsAreAccepted = true;
         }
         /// <summary>
         ///     Get the collection of created RegexColumns
@@ -54,7 +55,7 @@ namespace TextFileDataSet
         ///     a misread
         ///     default is set to true
         /// </summary>
-        public bool EmptyFieldsAreAccepted { get; set; } = true;
+        public bool EmptyFieldsAreAccepted { get; set; }
 
         /// <summary>
         ///     Adds a column to the collection of columns from which
