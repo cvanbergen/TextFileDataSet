@@ -4,3 +4,4 @@ TextFileDataSet/obj/
 TextFileDataSetDemo/bin/
 TextFileDataSetDemo/obj/
 *.user
+msbuild.log

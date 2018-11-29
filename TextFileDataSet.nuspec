@@ -8,7 +8,6 @@
     <owners>Christiaan van Bergen</owners>
     <licenseUrl>https://github.com/cvanbergen/TextFileDataSet/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/cvanbergen/TextFileDataSet</projectUrl>
-    <iconUrl></iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Converting text files or csv-files to a System.Data.DataSet based on regular expressions</description>
     <releaseNotes></releaseNotes>
