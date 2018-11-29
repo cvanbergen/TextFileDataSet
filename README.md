@@ -3,6 +3,7 @@ Converting text files or csv-files to a System.Data.DataTable based on regular e
 
 [![Build status](https://ci.appveyor.com/api/projects/status/12wo95w2s0xwjm9t?svg=true)](https://ci.appveyor.com/project/cvanbergen/textfiledataset)
 [![cvanbergen MyGet Build Status](https://www.myget.org/BuildSource/Badge/cvanbergen?identifier=e79c68c2-c119-4b8f-b93c-0d00d621138a)](https://www.myget.org/)
+[![cvanbergen Sonar quality gate](https://sonarcloud.io/api/project_badges/measure?project=cvanbergen_TextFileDataSet&metric=alert_status)](https://sonarcloud.io/)
 
 ## Introduction
 (Originally posted on 18 Feb 2008)
